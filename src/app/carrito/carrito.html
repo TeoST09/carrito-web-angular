@@ -1,0 +1,46 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow-md border border-gray-100">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">🛍️Carrito de Compra</h1>
+
+    <label class="flex items-center gap-3 text-gray-700 font-medium mb-4">
+        Cambiar el nombre de la tienda:
+        <input
+            type="text"
+            [(ngModel)]="nombreTienda"
+            class="border border-gray-300 rounded-lg px-3 py-2
+                focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+    </label>
+    
+    <div class="space-y-2 mb-6">
+        <p class="text-gray-600 font-medium">Productos en el carrito: <span class="text-blue-600 font-bold">{{cantidadProductos}}</span></p>
+        <p class="text-gray-600 font-medium">Total de Carrito:<span class="text-green-600 font-bold">$ {{totalCarrito}}</span></p>
+    </div>
+
+
+    <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 mb-6">
+        <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200" (click)="addProducto()">
+            Añadir Producto
+        </button>
+        <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200" (click)="add5Productos()">
+            Añadir 5 Productos
+        </button>
+        <button
+            class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+            (click)="deleteProducto()">
+            Eliminar Producto
+        </button>
+        <button class="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 col-span-1 sm:col-span-2" (click)="descuentoProducto()">
+            Cupón del 20% de descuento
+        </button>
+        <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 col-span-1 sm:col-span-2" (click)="vaciarCarrito()">
+            Vaciar Carrito
+        </button>
+    </div>
+    @if(notificacion){
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-3 rounded shadow-sm">
+            <p class="text-blue-700 text-sm font-medium"> {{notificacion}}</p>
+        </div>
+    }
+
+</div>
+ 
