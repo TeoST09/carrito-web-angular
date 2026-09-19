@@ -12,30 +12,45 @@ export class Carrito {
   nombreTienda: string = "Mi tienda";
   cantidadProductos: number = 0;
   precioBase: number = 37;
+  limitePrecio:number = 177;
   descuento: number = 20;
   aplicado: boolean = false;
   totalCarrito: number = 0;
   notificacion: string = 'Bienvenido';
 
   ngOnInit(){
-    this.comprobarNotificacion();
+    this.comprobarLimite();
   }
 
   addProducto(){
-    if(this.comprobarNotificacion() != true){
+    if(this.comprobarLimite() != true){
       this.cantidadProductos += 1;
       this.totalCarrito += this.precioBase;
       this.notificacion = `Tienes: ${this.cantidadProductos} productos`;
-      this.comprobarNotificacion();
     }
   }
 
   add5Productos(){
-    if(this.comprobarNotificacion() != true){
-      this.cantidadProductos += 5;
-      this.totalCarrito += (this.precioBase * 5);
-      this.notificacion = `Has añadido 5 productos, llevas: ${this.cantidadProductos} productos`;
+    let agregados = 0;
+    
+    if(this.comprobarLimite()){
+      return;
     }
+
+    for (let i = 0; i < 5; i++) {
+
+      if (this.comprobarLimite()) {
+        this.notificacion = `Se agregaron solamente ${agregados} productos. Límite: $${this.limitePrecio}`;
+        return;
+      }
+
+      this.cantidadProductos++;
+      this.totalCarrito += this.precioBase;
+
+      agregados++;
+    }
+
+    this.notificacion = `Has añadido ${agregados} productos, llevas: ${this.cantidadProductos} productos`;
   }
 
   deleteProducto(){
@@ -43,13 +58,13 @@ export class Carrito {
       this.cantidadProductos -= 1;
       this.totalCarrito -= this.precioBase;
       this.notificacion =  `Haz eliminado un producto. El precio total es de: ${this.totalCarrito}`;
+      this.comprobarLimite();
     }
   }
 
   descuentoProducto(){
     if(this.cantidadProductos >= 1 && this.aplicado == false){
       let descount = this.descuento / 100;
-      descount;
       this.totalCarrito = this.totalCarrito * descount;
       this.totalCarrito = Number(this.totalCarrito.toFixed(2));
       this.aplicado = true;
@@ -68,11 +83,9 @@ export class Carrito {
     this.aplicado = false;
   }
 
-  comprobarNotificacion(){
-    let limitePrecio = 177;
-
-    if(this.totalCarrito >= limitePrecio){
-      this.notificacion = `Has llegado al límite del precio: ${limitePrecio}`;
+  comprobarLimite(){
+    if(this.totalCarrito + this.precioBase > this.limitePrecio){
+      this.notificacion = `No puedes agregar más productos. El limite es: $${this.limitePrecio}`;
       return true;
     }
 
