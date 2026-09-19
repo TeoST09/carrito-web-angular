@@ -22,17 +22,20 @@ export class Carrito {
   }
 
   addProducto(){
-    this.cantidadProductos += 1;
-    this.totalCarrito += this.precioBase;
-    this.notificacion = `Tienes: ${this.cantidadProductos} productos`;
-    this.comprobarNotificacion();
+    if(this.comprobarNotificacion() != true){
+      this.cantidadProductos += 1;
+      this.totalCarrito += this.precioBase;
+      this.notificacion = `Tienes: ${this.cantidadProductos} productos`;
+      this.comprobarNotificacion();
+    }
   }
 
   add5Productos(){
-    this.cantidadProductos += 5;
-    this.totalCarrito += (this.precioBase * 5);
-    this.notificacion = `Has añadido 5 productos, llevas: ${this.cantidadProductos} productos`;
-    this.comprobarNotificacion();
+    if(this.comprobarNotificacion() != true){
+      this.cantidadProductos += 5;
+      this.totalCarrito += (this.precioBase * 5);
+      this.notificacion = `Has añadido 5 productos, llevas: ${this.cantidadProductos} productos`;
+    }
   }
 
   deleteProducto(){
@@ -51,8 +54,10 @@ export class Carrito {
       this.totalCarrito = Number(this.totalCarrito.toFixed(2));
       this.aplicado = true;
       this.notificacion = 'Se ha aplicado el descuento del 20%'
+    }else if (this.cantidadProductos >= 1 && this.aplicado == true) {
+      this.notificacion = 'Error: Ya has aplicado el descuento';
     }else{
-      this.notificacion = 'Erro: Ya has aplicado el descuento';
+      this.notificacion = 'Error: No tienes ningun producto en el carrito';
     }
   }
 
@@ -67,8 +72,11 @@ export class Carrito {
     let limitePrecio = 177;
 
     if(this.totalCarrito >= limitePrecio){
-    this.notificacion = `Has llegado al límite del precio: ${limitePrecio}`;
+      this.notificacion = `Has llegado al límite del precio: ${limitePrecio}`;
+      return true;
     }
+
+    return false;
   }
 
 }

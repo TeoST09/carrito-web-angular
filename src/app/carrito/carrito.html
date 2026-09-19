@@ -1,46 +1,52 @@
-<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow-md border border-gray-100">
-    <h1 class="text-2xl font-bold text-gray-800 mb-4">🛍️Carrito de Compra</h1>
+<div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-800/60 transition-all duration-300">
+    <h1 class="text-2xl font-black text-slate-800 dark:text-slate-50 mb-6 flex items-center gap-2 drop-shadow-sm tracking-tight">
+        <span class="text-3xl">🛍️</span> Carrito de Compra
+    </h1>
 
-    <label class="flex items-center gap-3 text-gray-700 font-medium mb-4">
-        Cambiar el nombre de la tienda:
+    <label class="flex flex-col gap-2 text-gray-700 dark:text-slate-300 text-sm font-semibold mb-6">
+        Cambiar el nombre de la tienda
         <input
             type="text"
             [(ngModel)]="nombreTienda"
-            class="border border-gray-300 rounded-lg px-3 py-2
-                focus:outline-none focus:ring-2 focus:ring-blue-500"
+            class="border border-gray-200 dark:border-slate-700/80 bg-gray-50 dark:bg-slate-800/50 text-gray-900 dark:text-slate-100 rounded-xl px-4 py-2.5 text-base font-normal focus:outline-none focus:ring-2 focus:ring-blue-500/40 dark:focus:ring-blue-400/40 transition-all"
         />
     </label>
     
-    <div class="space-y-2 mb-6">
-        <p class="text-gray-600 font-medium">Productos en el carrito: <span class="text-blue-600 font-bold">{{cantidadProductos}}</span></p>
-        <p class="text-gray-600 font-medium">Total de Carrito:<span class="text-green-600 font-bold">$ {{totalCarrito}}</span></p>
+    <div class="grid grid-cols-2 gap-4 p-4 mb-6 bg-gray-50 dark:bg-slate-800/40 rounded-xl border border-gray-100 dark:border-slate-800/40">
+        <div>
+            <p class="text-xs text-gray-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Productos</p>
+            <span class="text-xl font-bold text-blue-600 dark:text-blue-400">{{cantidadProductos}}</span>
+        </div>
+        <div class="border-l border-gray-200 dark:border-slate-700/60 pl-4">
+            <p class="text-xs text-gray-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Total Carrito</p>
+            <span class="text-xl font-bold text-green-600 dark:text-green-400">$ {{totalCarrito}}</span>
+        </div>
     </div>
 
-
-    <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 mb-6">
-        <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200" (click)="addProducto()">
+    <div class="grid grid-cols-1 gap-2.5 sm:grid-cols-2 mb-6">
+        <button class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-2.5 px-4 rounded-xl shadow-md shadow-blue-500/10 hover:shadow-blue-500/20 transition duration-200 active:scale-[0.98]" (click)="addProducto()">
             Añadir Producto
         </button>
-        <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200" (click)="add5Productos()">
+        <button class="bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-semibold py-2.5 px-4 rounded-xl shadow-md shadow-indigo-500/10 hover:shadow-indigo-500/20 transition duration-200 active:scale-[0.98]" (click)="add5Productos()">
             Añadir 5 Productos
         </button>
-        <button
-            class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
-            (click)="deleteProducto()">
+        <button class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-2.5 px-4 rounded-xl shadow-md transition duration-200 active:scale-[0.98]" (click)="deleteProducto()">
             Eliminar Producto
         </button>
-        <button class="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 col-span-1 sm:col-span-2" (click)="descuentoProducto()">
+        <button class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-semibold py-2.5 px-4 rounded-xl shadow-md transition duration-200 col-span-1 sm:col-span-2 active:scale-[0.98]" (click)="descuentoProducto()">
             Cupón del 20% de descuento
         </button>
-        <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 col-span-1 sm:col-span-2" (click)="vaciarCarrito()">
+        <button class="bg-slate-100 hover:bg-red-50 dark:bg-slate-800/80 dark:hover:bg-red-950/30 text-slate-700 hover:text-red-600 dark:text-slate-300 dark:hover:text-red-400 font-semibold py-2.5 px-4 rounded-xl border border-gray-200 dark:border-slate-700/50 hover:border-red-200 dark:hover:border-red-900/50 transition duration-200 col-span-1 sm:col-span-2" (click)="vaciarCarrito()">
             Vaciar Carrito
         </button>
     </div>
+
     @if(notificacion){
-        <div class="bg-blue-50 border-l-4 border-blue-500 p-3 rounded shadow-sm">
-            <p class="text-blue-700 text-sm font-medium"> {{notificacion}}</p>
+        <div class="bg-blue-50/60 dark:bg-blue-950/30 border-l-4 border-blue-500 dark:border-blue-500/80 p-3.5 rounded-xl backdrop-blur-sm">
+            <p class="text-blue-800 dark:text-blue-300 text-sm font-medium flex items-start gap-2">
+                <span class="mt-0.5"></span>
+                {{notificacion}}
+            </p>
         </div>
     }
-
 </div>
- 
